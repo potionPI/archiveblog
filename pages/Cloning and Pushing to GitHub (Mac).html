@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" class="candy">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cloning and Pushing to GitHub (Mac)</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+	  <script src="../index.js"></script>
+    
+    <div class="heading_and_nav">
+      <h1><a href="../index.html">Archive & Info Site</a></h1>
+      <p>
+        <a href="../index.html"> HOME </a>
+        ○
+        <a href="../directory.html"> DIRECTORY </a>
+        ○
+        <a href="../aboutme.html"> ABOUT ME & SITE </a>
+      </p>
+    </div>
+
+    <div class="header">
+      <h1>Cloning and Pushing to GitHub (Mac)</h1>
+      <p>Last updated: Sep. 9 2022</p>
+    </div>
+
+    <div class="content">
+      <h1>How to clone a repository on a Mac terminal</h1>
+      
+      <div class="code">
+        <p class="comment"># Navigate to the folder you're interested in saving the folder to first</p>
+        <p>cd /My/Folder/Path</p>
+        <p class="comment">
+          # To copy the url associated with the repo, navigate to the repository online then
+          click the "Code" button and copy the link under "HTTPS"
+        </p>
+        <p>git clone https://github.com/username/reponame.git</p>
+      </div>
+
+      <h1>How to push changes to a repository on a Mac terminal</h1>
+      <div class="code">
+        <p class="comment"># After making some changes to the folder obtained from cloning...</p>
+        <p>git add .</p>
+        <p>git commit -m 'my message on what channged'</p>
+      </div>
+      <p>
+        There may be a prompt for a username and "password"
+        during this step. As of the time of writing, the "password"
+        expected is actually a "personal access token." 
+        This token can be obtained from signing into GitHub and 
+        going into settings > developer settings > personal access tokens.
+      </p>
+    
+      <h1>Sources:</h1>
+      <p>
+        <a href="https://blogs.sap.com/2019/07/12/how-to-clone-a-github-repository-to-local-mac-computer/">
+            >Jason Xia's article: "How to clone a GitHub repository to local mac computer"<
+        </a>
+      </p>
+      <p>
+        <a href="https://www.earthdatascience.org/workshops/intro-version-control-git/basic-git-commands/">
+          >Earth Lab page on how to clone, add, commit, and push<
+        </a>
+      </p>
+      <p>
+        <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token">
+          >GitHub source on how to create a personal access token<
+        </a>
+      </p>
+    </div>
+
+  </body>
+</html>
