@@ -1,0 +1,245 @@
+/*learn how to set themes here: https://webdesign.tutsplus.com/tutorials/color-schemes-with-css-variables-and-javascript--cms-36989*/
+:root,
+:root.coffee {
+	--bg-color: #b9b4ac;
+	--text-color: #2B190C;
+	--accent-color: #655e5a;
+	--div-color: #c4b5ad4c;
+	--comment-color: #dea29f;
+}
+:root.blue {
+	--bg-color: #343434;
+	--text-color: #e1e7f0;
+	--accent-color: #e4f4fc;
+	--div-color: #c0c2c359;
+	--comment-color: #dbdbdc;
+}
+:root.candy {
+	--bg-color: #fdfdfd;
+	--text-color: #040404;
+	--accent-color: #978fca;
+	--div-color: #978fca15;
+	--comment-color: #b38484;
+}
+
+@font-face {
+	font-family: 'Poppins';
+	src: url("fonts/Poppins/Poppins-Regular.ttf")
+}
+
+@font-face {
+font-family: "cella";
+src: url("fonts/cella/Cella.ttf");
+}
+
+@font-face {
+font-family: "underwood-champion";
+src: url("fonts/underwood-champion/uwch.ttf");
+}
+
+@font-face {
+font-family: "brock-script";
+src: url("fonts/brock-script/BrockScript.ttf");
+}
+
+@font-face {
+font-family: "BrownBagLunch";
+src: url("fonts/BrownBagLunch/BrownBagLunch.ttf");
+}
+
+@font-face {
+font-family: "engineeringhand";
+src: url("fonts/EngineerHand.ttf");
+}
+
+html {
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	border-color: var(--accent-color);
+	font-family: 'Poppins', Arial, sans-serif;
+}
+
+p {
+	font-weight: normal;
+	font-style: normal;
+	font-size: 25px;
+}
+pre {
+	font-weight: normal;
+	font-style: normal;
+	font-size: 25px;
+	white-space: pre-wrap;
+}
+li {
+	font-weight: normal;
+	font-style: normal;
+	font-size: 20px;
+	margin-bottom: 30px;
+}
+h1 {
+	font-family: 'Poppins', Arial, sans-serif;
+	font-weight: bold;
+	font-style: normal;
+	font-size: 45px;
+}
+h2 {
+	font-weight: bold;
+	font-style: normal;
+	font-size: 35px;
+	margin-bottom: 5px;
+}
+hr {
+	border-top: 1px dotted var(--accent-color);
+	border-bottom: none;
+}
+button {
+	font-family: 'Poppins', Arial, sans-serif;
+	border-color: var(--text-color);
+	border-width: 5px;
+	border-style: solid;
+	background-color: var(--div-color);
+	color: var(--text-color);
+	font-size: 20px;
+	padding: 10px;
+}
+button:hover {
+	border-style: dashed;
+	color: var(--accent-color);
+	cursor: pointer;
+}
+button:active {
+	border-style: solid;
+	color: var(--text-color);
+}
+a {
+	text-decoration: underline;
+	color: var(--accent-color);
+}
+a:hover {
+	color: var(--text-color);
+}
+a:active {
+	text-shadow: 0 0 7px var(--accent-color);
+}
+
+
+video {
+	width: 100%;
+}
+video.mini {
+	width: 250px;
+}
+img.mini {
+	width: 250px;
+}
+img.figure {
+	width: 100%;
+}
+
+div {
+	background-color: transparent;
+	padding: 10px;
+	margin: 10px;
+	border-radius: 10px;
+	border-style: solid;
+	border-width: 1px;
+}
+div.heading_and_nav {
+	text-align: center;
+	background-color: transparent;
+	border-style: none;
+}
+div.heading_and_nav a {
+	text-decoration: none;
+	color: var(--text-color);
+}
+div.heading_and_nav a:hover {
+	color: var(--accent-color);
+}
+div.heading_and_nav a:active {
+	text-shadow: 0 0 7px var(--accent-color);
+}
+div.heading_and_nav h1 a:hover {
+	color: var(--accent-color);
+}
+div.heading_and_nav h1 a:active {
+	color: var(--text-color);
+	text-shadow: none;
+}
+div.heading_and_nav h1 {
+	font-size: 55px;
+}
+div.header {
+	text-align: center;
+	background-color: transparent;
+	border-style: none;
+}
+div.header h1 {
+	margin: 0px;
+	font-size: 35px;
+}
+div.content {
+	margin: 15px;
+}
+div.content h1 {
+	text-align: left;
+}
+div.code {
+	background-color: var(--div-color);
+	margin: 0 auto;
+	margin-bottom: 5px;
+	border-style: none;
+	padding: 3px;
+}
+div.code p {
+	font-family: monospace, monospace;
+}
+div.code p.comment {
+	color: var(--comment-color);
+	margin-bottom: -20px;
+}
+span.comment {
+	color: var(--comment-color);
+}
+
+div.content_timeline {
+	border-width: 10px;
+	border-style: dashed;
+	border-right: 0px;
+	border-top: 0px;
+	border-bottom: 0px;
+	border-radius: 0px 0px 0px 0px;
+}
+div.messagebox {
+	border-radius: 5px;
+	border-style: none;
+	background-color: var(--div-color);
+}
+div.imgbox {
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 10px;
+	background-color: var(--div-color);
+	border-color: var(--div-color);
+	padding: 0;
+}
+
+div.video {
+	text-align: center;
+}
+div.mini {
+	text-align: left;
+	border-style: none;
+}
+div.titled_video {
+	margin: 5px auto;
+	display: inline-block;
+	padding: 0;
+	border-width: 5px;
+}
+div.titled_video p {
+	margin: 0;
+	text-align: center;
+	width: 250px;
+	font-size: 18px;
+}

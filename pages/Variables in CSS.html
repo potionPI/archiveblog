@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" class="candy">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Colored Themes in CSS</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+	  <script src="../index.js"></script>
+    
+    <div class="heading_and_nav">
+      <h1><a href="../index.html">Archive & Info Site</a></h1>
+      <p>
+        <a href="../index.html"> HOME </a>
+        ○
+        <a href="../directory.html"> DIRECTORY </a>
+        ○
+        <a href="../aboutme.html"> ABOUT ME & SITE </a>
+      </p>
+    </div>
+
+    <div class="header">
+      <h1>Variables in CSS</h1>
+    </div>
+
+    <div class="content">
+      <h1>Code snippets</h1>
+
+      <h2>How to set variables in .css file</h2>
+      <div class="code">
+        <p class="comment">/* style.css */</p>
+        <pre>
+:root,
+:root.coffee {
+  --bg-color: #b9b4ac;
+  --text-color: #2B190C;
+  --accent-color: #655e5a;
+}
+:root.blue {
+  --bg-color: #343434;
+  --text-color: #e1e7f0;
+  --accent-color: #e4f4fc;
+}
+
+html {
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	border-color: var(--accent-color);
+}
+        </pre>
+      </div>
+      
+      <h2>How to use the variables in .html files</h2>
+      <div class="code">
+        <p class="comment">&#60;!-- file.html --&#62;</p>
+        <p>
+          &#60;html lang="en" class="blue"&#62;
+        </p>
+      </div>
+
+      <h1>Source:</h1>
+      <p>
+        <a href="https://webdesign.tutsplus.com/tutorials/color-schemes-with-css-variables-and-javascript--cms-36989">
+          >Envato Tuts+ page for switching color schemes with CSS and JavaScript<
+        </a>
+      </p>
+    </div>
+
+  </body>
+</html>

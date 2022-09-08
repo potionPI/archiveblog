@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" class="candy">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Creating and Cloning Conda Environments</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+	  <script src="../index.js"></script>
+    
+    <div class="heading_and_nav">
+      <h1><a href="../index.html">Archive & Info Site</a></h1>
+      <p>
+        <a href="../index.html"> HOME </a>
+        ○
+        <a href="../directory.html"> DIRECTORY </a>
+        ○
+        <a href="../aboutme.html"> ABOUT ME & SITE </a>
+      </p>
+    </div>
+
+    <div class="header">
+      <h1>Creating and Cloning Conda Environments</h1>
+    </div>
+
+    <div class="content">
+      <h1>Terminal commands</h1>
+
+      <h2>How to create a new conda environment</h2>
+      <div class="code">
+        <p class="comment"># basic creation</p>
+        <p>conda create --name myenv</p>
+
+        <p class="comment"># specify python version</p>
+        <p>conda create -n myenv python=3.8</p>
+
+        <p class="comment"># don't ask for confirmation</p>
+        <p>conda create -n myenv -y</p>
+      </div>
+      <p>For more information, visit: 
+        <a href="https://docs.conda.io/projects/conda/en/latest/commands/create.html">
+          >Anaconda reference for conda create command<
+        </a>
+      </p>
+
+      <h2>How to clone a conda environment</h2>
+      <div class="code">
+        <p>conda create --name myclone --clone myenv</p>
+      </div>
+    
+
+      <h2>How to switch in and out of a conda environment</h2>
+      <div class="code">
+        <p class="comment"># activate environment</p>
+        <p>conda activate myenv</p>
+
+        <p class="comment"># deactivate environment, a.k.a return to base environment</p>
+        <p>conda deactivate</p>
+      </div>
+
+      <h2>How to get list of environments you have</h2>
+      <div class="code">
+        <p>conda env list</p>
+      </div>
+    
+      <h1>Source(s) for more information</h1>
+      <p>
+        <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">
+          >Anaconda documentation for managing environments<
+        </a>
+        <br>
+        <a href="https://docs.conda.io/projects/conda/en/latest/commands/create.html">
+          >Anaconda reference for conda create command<
+        </a>
+      </p>
+    </div>
+
+  </body>
+</html>

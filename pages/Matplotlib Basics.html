@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" class="candy">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Matplotlib Basics</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+	  <script src="../index.js"></script>
+    
+    <div class="heading_and_nav">
+      <h1><a href="../index.html">Archive & Info Site</a></h1>
+      <p>
+        <a href="../index.html"> HOME </a>
+        ○
+        <a href="../directory.html"> DIRECTORY </a>
+        ○
+        <a href="../aboutme.html"> ABOUT ME & SITE </a>
+      </p>
+    </div>
+
+    <div class="header">
+      <h1>Matplotlib Basics</h1>
+    </div>
+
+    <div class="content">
+      <h1>Code snippets</h1>
+
+      <ul>
+        <li>
+            <a href="#Common import statement">
+                Common import statement
+            </a>
+        </li>
+
+        <li>
+            <a href="#Basic plot and code structure">
+                Basic plot and code structure
+            </a>
+        </li>
+
+        <li>
+            <a href="#How to set title and axes labels">
+                How to set title and axes labels
+            </a>
+        </li>
+
+        <li>
+            <a href="#How to change the size of a figure">
+                How to change the size of a figure
+            </a>
+        </li>
+
+        <li>
+            <a href="#Basic plot given all y values and their corresponding x values">
+                Basic plot given all y values and their corresponding x values
+            </a>
+        </li>
+
+        <li>
+            <a href="#How to set range of the x and y axes using plt">
+                How to set range of the x and y axes using plt
+            </a>
+        </li>
+
+        <li>
+            <a href="#How to arbitrarily set location of multiple plots using fig.add_axes">
+                How to arbitrarily set location of multiple plots using fig.add_axes
+            </a>
+        </li>
+
+        <li>
+            <a href="#How to plot multiple xy pairs on one plot (and add a legend)">
+                How to plot multiple xy pairs on one plot (and add a legend)
+            </a>
+        </li>
+
+        <li>
+            <a href="#How to zoom into (or out of) a section of the plot by setting limits on the axes">
+                How to zoom into (or out of) a section of the plot by setting limits on the axes
+            </a>
+        </li>
+
+        <li>
+            <a href="#How to make subplots">
+                How to make subplots
+            </a>
+        </li>
+
+        <li>
+            <a href="#How to control legend positioning">
+                How to control legend positioning
+            </a>
+        </li>
+        
+        <li>
+            <a href="#How to make a bar plot">
+                How to make a bar plot
+            </a>
+        </li>
+
+        <li>
+            <a href="#How to make a hist plot">
+                How to make a hist plot
+            </a>
+        </li>
+
+        <li>
+            <a href="#How to make a scatter plot">
+                How to make a scatter plot
+            </a>
+        </li>
+
+        <li>
+            <a href="#How to make a pie chart">
+                How to make a pie chart
+            </a>
+        </li>
+      </ul>
+      
+      <h2 id="Common import statement">Common import statement</h2>
+      <div class="code">
+        <p>import matplotlib.pyplot as plt</p>
+      </div>
+
+      <h2 id="Basic plot and code structure">Basic plot and code structure</h2>
+      <div class="code">
+        <p>plt.figure()</p>
+        <p>x = [1, 2, 3]</p>
+        <p>y = [11, 8, 22]</p>
+        <p>plt.plot(x,y)</p>
+        <p>plt.show()</p>
+      </div>
+
+      <h2 id="How to set title and axes labels">How to set title and axes labels</h2>
+      <div class="code">
+        <p>plt.title("My title")</p>
+        <p>plt.ylabel("y axis label")</p>
+        <p>plt.xlabel("x axis label")</p>
+      </div>
+
+      <h2 id="How to change the size of a figure">How to change the size of a figure</h2>
+      <div class="code">
+        <p>width=15</p>
+        <p>height=5</p>
+        <p>plt.figure(figsize=(width, height))</p>
+      </div>
+
+      <h2 id="Basic plot given all y values and their corresponding x values">Basic plot given all y values and their corresponding x values</h2>
+      <div class="code">
+        <p>x = [1, 2, 3]</p>
+        <p>y = [11, 8, 22]</p>
+        <p>plt.plot(x, y)</p>
+      </div>
+
+      <h2 id="How to set range of the x and y axes using plt">How to set range of the x and y axes using plt</h2>
+      <div class="code">
+        <p>x = [1, 2, 3]</p>
+        <p>y = [11, 8, 22]</p>
+        
+        <p>x_lower = 0</p>
+        <p>x_upper = 5</p>
+        <p>y_lower = 5</p>
+        <p>y_upper = 25</p>
+        
+        <p>plt.plot(x, y)</p>
+
+        <p class="comment">
+            # Note that the range is INCLUSIVE!
+            So for example, in the x axis, the
+            number 0 will show up on lower left 
+            corner, and the number 5 will show up
+            on the lower right corner.
+        </p>
+        <p>plt.axis([x_lower, x_upper, y_lower, y_upper])</p>
+
+      </div>
+
+      <h2 id="How to arbitrarily set location of multiple plots using fig.add_axes">How to arbitrarily set location of multiple plots using fig.add_axes</h2>
+      <h3>Note: add_axes does NOT set the range of the axes, but rather 
+        the location and height and widths</h3>
+      <div class="code">
+        <pre>
+fig = plt.figure()
+        </pre>
+        <p class="comment"># left plot</p>
+        <pre>
+x = [1, 2, 3]
+y = [11, 8, 22]
+x0 = 0.1
+y0 = 0.1
+width = 0.5
+height = 0.3
+ax = fig.add_axes([x0, y0, width, height])
+ax.plot(x,y)
+        </pre>
+        <p class="comment"># right plot</p>
+        <pre>
+x = [1, 2, 3]
+y = [12, 15, 2]
+x0 = 0.5
+y0 = 0.6
+width = 0.8
+height = 0.5
+ax = fig.add_axes([x0, y0, width, height])
+ax.plot(x,y)
+
+plt.show()
+        </pre>
+      </div>
+      <button onclick="show_hide_div('Matplotlib_Basics_add_axes_explanation')">
+        >Click here to show an image explanation<
+      </button>
+      <div class="imgbox" id="Matplotlib_Basics_add_axes_explanation" style="display:none;">
+        <img class="figure" src="Matplotlib_Basics_add_axes_explanation.jpg">
+      </div>
+
+      <h2 id="How to plot multiple xy pairs on one plot (and add a legend)">How to plot multiple xy pairs on one plot (and add a legend)</h2>
+      <h3>The bulkier method which saves the plots in variables:</h3>
+      <div class="code">
+        <pre>
+fig = plt.figure()
+
+ax = fig.add_axes([1,1,1,1])
+
+x = [1, 2, 3]
+y = [11, 8, 22]
+ax1 = ax.plot(x,y)
+        </pre>
+        <p class="comment"># Note that the basic line plot will NOT auto sort the x axis</p>
+        <pre>
+x = [1, 5, 3]
+y = [12, 15, 2]
+ax2 = ax.plot(x,y)
+
+ax.legend(['ax1 line', 'ax2 line'])
+
+plt.show()
+        </pre>
+      </div>
+      <br>
+      <h3>The lighter method which does NOT save the plots in variables:</h3>
+      <div class="code">
+        <pre>
+fig = plt.figure()
+
+x = [1, 2, 3]
+y = [11, 8, 22]
+plt.plot(x,y)
+        </pre>
+        <p class="comment"># Note that the basic line plot will NOT auto sort the x axis</p>
+        <pre>
+x = [1, 5, 3]
+y = [12, 15, 2]
+plt.plot(x,y)
+
+plt.legend(['ax1 line', 'ax2 line'])
+
+plt.show()
+        </pre>
+      </div>
+      <button onclick="show_hide_div('Matplotlib_Basics_multi_and_legend')">
+        >Click here to show the image output (which would be about the same for either method)<
+      </button>
+      <div class="imgbox" id="Matplotlib_Basics_multi_and_legend" style="display:none;">
+        <img class="figure" src="Matplotlib_Basics_multi_and_legend.png">
+      </div>
+
+      <h2 id="How to zoom into (or out of) a section of the plot by setting limits on the axes">How to zoom into (or out of) a section of the plot by setting limits on the axes</h2>
+      <div class="code">
+        <p>ax.plot(x,y)</p>
+
+        <p class="comment">
+            # Note that the range is INCLUSIVE!
+            So the lowest number on the x axis will be 1 and
+            the highest number on the x axis will be 2.
+            Likewise, both 8 and 12 will appear on the y axis.
+        </p>
+        <p>ax.set_xlim(1,2)</p>
+        <p>ax.set_ylim(8,12)</p>
+      </div>
+
+      <h2 id="How to make subplots">How to make subplots</h2>
+      <h3>Lightweight method:</h3>
+      <div class="code">
+        <p>plt.figure()</p>
+        <br>
+        <p class='comment'># plt.subplot(total rows, total columns, current plot location)</p>
+        <p>plt.subplot(1,2,1)</p>
+        <p>x = [1, 2, 3]</p>
+        <p>y = [11, 8, 22]</p>
+        <p>plt.plot(x, y)</p>
+        <br>
+        <p>x = [1, 3, 4]</p>
+        <p>y = [12, 15, 2]</p>
+        <p>plt.subplot(1,2,2)</p>
+        <p>plt.plot(x, y)</p>
+        <br>
+        <p>plt.show()</p>    
+      </div>
+      <button onclick="show_hide_div('Matplotlib_Basics_subplot_simple')">
+        >Click here to show the image output<
+      </button>
+      <div class="imgbox" id="Matplotlib_Basics_subplot_simple" style="display:none;">
+        <img class="figure" src="Matplotlib_Basics_subplot_simple.png">
+      </div>
+
+      <h3>Method that allows more flexibility:</h3>
+      <h4>One row or column:</h4>
+      <div class="code">
+        <p class="comment"># plt.subplots(total rows, total columns)</p>
+        <pre>
+fig, axes = plt.subplots(2, 1)
+fig.set_size_inches(w=10, h=5)
+
+x = [1, 2, 3]
+y = [11, 8, 22]
+axes[0].plot(x,y)
+x = [1, 3, 4]
+y = [12, 15, 2]
+axes[0].plot(x,y)
+ 
+axes[1].plot(x,y)
+        </pre>
+      </div>
+      <button onclick="show_hide_div('Matplotlib_Basics_one_col')">
+        >Click here to show the image output<
+      </button>
+      <div class="imgbox" id="Matplotlib_Basics_one_col" style="display:none;">
+        <img class="figure" src="Matplotlib_Basics_one_col.png">
+      </div>
+
+      <h4>More than one row/column:</h4>
+      <div class="code">
+        <p class="comment"># plt.subplots(total rows, total columns)</p>
+        <pre>
+fig, axes = plt.subplots(2, 3)
+fig.set_size_inches(w=10, h=5)
+
+x = [1, 2, 3]
+y = [11, 8, 22]
+        </pre>
+        <p class="comment"># axes[row_location, column_location]</p>
+        <pre>
+axes[0,0].plot(x,y)
+
+x = [1, 3, 4]
+y = [12, 15, 2]
+        </pre>
+        <p class="comment"># axes[row_location, column_location]</p>
+        <pre>
+axes[0,0].plot(x,y)
+        </pre>
+        <p class="comment"># axes[row_location, column_location]</p>
+        <pre>
+axes[0,1].plot(x,y)
+        </pre>
+      </div>
+      <button onclick="show_hide_div('Matplotlib_Basics_subplot_complex')">
+        >Click here to show the image output<
+      </button>
+      <div class="imgbox" id="Matplotlib_Basics_subplot_complex" style="display:none;">
+        <img class="figure" src="Matplotlib_Basics_subplot_complex.png">
+      </div>
+
+      <h3>Another method that allows more flexibility, using a more flexible grid:</h3>
+      <div class="code">
+        <p class="comment"># plt.subplot2grid(shape_of_grid, location_of_top_left_corner, rowspan=1, colspan=1)</p>
+        <pre>
+ax1 = plt.subplot2grid (
+  (5, 3), (0, 0), rowspan = 2,  colspan = 2)
+ax2 = plt.subplot2grid (
+  (5, 3), (0, 2), rowspan = 5, colspan = 1)
+ax3 = plt.subplot2grid (
+  (5, 3), (2, 0), rowspan = 3, colspan = 2)
+
+ax1.set_title('ax1')
+ax2.set_title('ax2')
+ax3.set_title('ax3')
+
+x = [1,2,3]
+y = [11,8,22]
+z = [2,4,6]
+ax1.plot(x, y)
+ax2.plot(x, z)
+ax3.plot(z, y)
+        </pre>
+        <p class="comment"># tight_layout() resolves title formatting issues with subplot2grid</p>
+        <pre>
+plt.tight_layout()
+plt.show()
+        </pre>
+      </div>
+      <button onclick="show_hide_div('Matplotlib_Basics_subplot_grid')">
+        >Click here to show the image output<
+      </button>
+      <div class="imgbox" id="Matplotlib_Basics_subplot_grid" style="display:none;">
+        <img class="figure" src="Matplotlib_Basics_subplot_grid.jpg">
+      </div>
+
+      <h2 id="How to control legend positioning">How to control legend positioning</h2>
+      <div class="code">
+        <p class="comment">
+            # With bbox_to_anchor, loc determines which corner of the legend
+            box gets the coordinates specified by [x_position, y_position]
+        </p>
+        <p>x_position=1.1</p>
+        <p>y_position=0.8</p>
+        <p>plt.legend(['ax1 line', 'ax2 line'], bbox_to_anchor=[x_position, y_position], loc='upper left')</p>
+      </div>
+      <button onclick="show_hide_div('Matplotlib_Basics_legend_bbox_to_anchor')">
+        >Click here to show information on bbox_to_anchor<
+      </button>
+      <div class="imgbox" id="Matplotlib_Basics_legend_bbox_to_anchor" style="display:none;">
+        <img class="figure" src="Matplotlib_Basics_legend_bbox_to_anchor.jpg">
+      </div>
+
+      <div class="code">
+        <p class="comment">
+            # Without bbox_to_anchor, loc will position the legend based on
+            the plot box itself.
+        </p>
+        <p>plt.legend(['ax1 line', 'ax2 line'], loc='upper left')</p>
+      </div>
+      <button onclick="show_hide_div('Matplotlib_Basics_legend_no_bbox')">
+        >Click here to show information for using loc without bbox_to_anchor<
+      </button>
+      <div class="imgbox" id="Matplotlib_Basics_legend_no_bbox" style="display:none;">
+        <img class="figure" src="Matplotlib_Basics_legend_no_bbox.png">
+      </div>
+      <p>Note: possible <b>loc</b> arguments include:</p>
+      <p>
+        best
+        <br>
+        upper right
+        <br>
+        upper left
+        <br>
+        lower left
+        <br>
+        lower right
+        <br>
+        right
+        <br>
+        center left
+        <br>
+        center right
+        <br>
+        lower center
+        <br>
+        upper center
+        <br>
+        center
+      </p>
+
+      <h2 id="How to make a bar plot">How to make a bar plot</h2>
+      <div class="code">
+        <p class="comment"># x axis entries need to be unique but need not be in order</p>
+        <p class="comment"># y axis is the height of the bar</p>
+        <p>x = [1, 5, 3]</p>
+        <p>y = [2, 1, 5]</p>
+        <p>plt.bar(x,y)</p>
+      </div>
+
+      <h2 id="How to make a hist plot">How to make a hist plot</h2>
+      <div class="code">
+        <p class="comment"># the plot will group items in x into bins</p>
+        <p>x = [1, 5, 3, 5]</p>
+        <p>plt.hist(x)</p>
+      </div>
+
+      <h2 id="How to make a scatter plot">How to make a scatter plot</h2>
+      <div class="code">
+        <p class="comment"># x axis entries need not be unique nor in order</p>
+        <p>x = [1, 5, 3, 5]</p>
+        <p>y = [2, 1, 5, 3]</p>
+        <p>plt.scatter(x,y)</p>
+      </div>
+
+      <h2 id="How to make a pie chart">How to make a pie chart</h2>
+      <div class="code">
+        <p class="comment"># Each x value is its own pie slice. The percentage of the pie is automatically calculated by the plot where the total is the sum of all the x values</p>
+        <p>x = [400, 200, 300, 100]</p>
+        
+        <p class="comment"># The greater the value, the more the pie slice corresponding to the position in the x array is "exploded" out from the pie chart</p>
+        <p>e  =(0.1, 0, 0, 0.9)</p>
+        <p>plt.pie(x, explode = e)</p>
+      </div>
+
+      <h1>Sources:</h1>
+      <p>
+        <a href="https://www.geeksforgeeks.org/matplotlib-tutorial/">
+          >GeeksforGeeks Matplotlib Tutorial<
+        </a>
+      </p>
+      <p>
+        <a href="https://stackoverflow.com/questions/43326680/what-are-the-differences-between-add-axes-and-add-subplot">
+            >StackOverflow information about add_axes<
+        </a>
+      </p>
+      <p>
+        <a href="https://www.tutorialspoint.com/matplotlib/matplotlib_subplot2grid_function.htm">
+            >Tutorials Point information about subplot2grid< 
+        </a>
+      </p>
+    </div>
+
+  </body>
+</html>
