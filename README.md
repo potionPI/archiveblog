@@ -1,2 +1,3 @@
 # archiveblog
-site
+
+Link: [https://potionpi.github.io/archiveblog/](https://potionpi.github.io/archiveblog/)
