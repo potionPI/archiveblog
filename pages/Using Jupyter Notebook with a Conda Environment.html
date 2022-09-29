@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" class="candy">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Using Jupyter Notebook with a Conda Environment</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+	  <script src="../index.js"></script>
+    
+    <div class="heading_and_nav">
+      <h1><a href="../index.html">Archive & Info Site</a></h1>
+      <p>
+        <a href="../index.html"> HOME </a>
+        ○
+        <a href="../directory.html"> DIRECTORY </a>
+        ○
+        <a href="../aboutme.html"> ABOUT ME & SITE </a>
+      </p>
+    </div>
+
+    <div class="header">
+      <h1>Using Jupyter Notebook with a Conda Environment</h1>
+      <p>Last updated: Sep. 29 2022</p>
+    </div>
+
+    <div class="content">
+      <h1>Terminal commands</h1>
+
+      <h2>Steps:</h2>
+      <div class="code">
+        <p class="comment"># Step 1: Create a new conda environment</p>
+        <p>conda create --name mynewenv</p>
+
+        <p class="comment"># Step 2: Activate the conda environment and modify it as you like</p>
+        <p>conda activate mynewenv</p>
+        <p class="comment"># (Modify with any installs, etc.)</p>
+        <p>pip install tqdm</p>
+
+        <p class="comment"># Step 3: CRITICAL STEP! This line allows jupyter notebook to use this environment</p>
+        <p>python -m ipykernel install --user --name=mynewenv</p>
+
+        <p class="comment"># Step 4: Deactivate the environment (this is not entirely necessary but it helps for remembering that when jupyter notebook is run, it doesn't run from the created environment automatically)</p>
+        <p>conda deactivate</p>
+
+        <p class="comment"># Step 5: Run jupyter notebook </p>
+        <p>jupyter notebook</p>
+      </div>
+      
+      <button onclick="show_hide_div('UsingJupyterNotebookCondaEnv_NewMenu')">
+        >Click here to show an image explanation of how to create a jupyter notebook using a specific environment<
+      </button>
+      <div class="imgbox" id="UsingJupyterNotebookCondaEnv_NewMenu" style="display:none;">
+        <img class="figure" src="UsingJupyterNotebookCondaEnv_NewMenu.png">
+      </div>
+      
+
+      <button onclick="show_hide_div('UsingJupyterNotebookCondaEnv_switchenv')">
+        >Click here to show an image explanation of how to switch environments in an existing jupyter notebook<
+      </button>
+      <div class="imgbox" id="UsingJupyterNotebookCondaEnv_switchenv" style="display:none;">
+        <img class="figure" src="UsingJupyterNotebookCondaEnv_switchenv.png">
+      </div>
+
+
+      <h1>Python code</h1>
+      <h2>How to check current environment in jupyter notebook</h2>
+      <div class="code">
+        <p class="comment"># Simply run the following code in a cell</p>
+        <p>import sys</p>
+        <p>print(sys.version, sys.platform, sys.executable)</p>
+      </div>
+    
+      <h1>Source(s) for more information</h1>
+      <p>
+        <a href="https://medium.com/@nrk25693/how-to-add-your-conda-environment-to-your-jupyter-notebook-in-just-4-steps-abeab8b8d084">
+          >Medium article by Noopur R K showing how to add a conda environment to jupyter notebook<
+        </a>
+        <br>
+    </p>
+    <p>
+        <a href="https://github.com/tqdm/tqdm/issues/497">
+          >casperdcl's comment on GitHub issues shows how to see what environment is being used<
+        </a>
+      </p>
+    </div>
+
+  </body>
+</html>
