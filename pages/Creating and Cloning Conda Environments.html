@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Creating and Cloning Conda Environments</title>
+    <title>Creating, Cloning, and Deleting Conda Environments</title>
     <link rel="stylesheet" href="../style.css">
   </head>
   <body>
@@ -22,8 +22,8 @@
     </div>
 
     <div class="header">
-      <h1>Creating and Cloning Conda Environments</h1>
-      <p>Last updated: Sep. 9 2022</p>
+      <h1>Creating, Cloning, and Deleting Conda Environments</h1>
+      <p>Last updated: Sep. 29 2022</p>
     </div>
 
     <div class="content">
@@ -65,6 +65,11 @@
       <div class="code">
         <p>conda env list</p>
       </div>
+
+      <h2>How to delete a conda environment</h2>
+      <div class="code">
+        <p>conda env remove -n myenvname</p>
+      </div>
     
       <h1>Source(s) for more information</h1>
       <p>
@@ -75,6 +80,11 @@
       <p>
         <a href="https://docs.conda.io/projects/conda/en/latest/commands/create.html">
           >Anaconda reference for conda create command<
+        </a>
+      </p>
+      <p>
+        <a href="https://stackoverflow.com/questions/49127834/removing-conda-environment">
+          >Stack Overflow answer on how to delete an environment<
         </a>
       </p>
     </div>
