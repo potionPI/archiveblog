@@ -201,6 +201,10 @@ div.code p.comment {
 span.comment {
 	color: var(--comment-color);
 }
+div.code_output {
+	background-color: var(--div-color);
+	font-family: monospace, monospace;
+}
 
 div.content_timeline {
 	border-width: 10px;

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="candy">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pandas: Count Unique Values for One Column Based on Another</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+	  <script src="../index.js"></script>
+    
+    <div class="heading_and_nav">
+      <h1><a href="../index.html">Archive & Info Site</a></h1>
+      <p>
+        <a href="../index.html"> HOME </a>
+        ○
+        <a href="../directory.html"> DIRECTORY </a>
+        ○
+        <a href="../aboutme.html"> ABOUT ME & SITE </a>
+      </p>
+    </div>
+
+    <div class="header">
+      <h1>Pandas: Count Unique Values for One Column Based on Another</h1>
+      <p>Last updated: Nov. 2 2022</p>
+    </div>
+
+
+    </div>
+
+    <div class="content">
+      <h1>Code snippets</h1>
+      <ul>
+        <li>
+            <a href="#For each value in one column, count the number of unique values in another column">
+              For each value in one column, count the number of unique values in another column
+            </a>
+        </li>
+      </ul>
+      
+      <h2 id="For each value in one column, count the number of unique values in another column">For each value in one column, count the number of unique values in another column:</h2>
+      <div class="code">
+        <p class="comment"># Find the animal type which has the most unique owner names by creating a dataframe which finds the count of unique owner names for each pet</p>
+        <pre>
+import pandas as pd
+
+df = pd.DataFrame({'Animal': [  'Falcon', 'Falcon', 'Falcon',
+                                'Parrot', 'Parrot', 'Parrot'],
+                    'Owner': ['Josh', 'Abraham', 'Minnie', 'Josh', 'Josh', 'Ron']})
+
+grouped = df.groupby('Animal')['Owner'].nunique()
+        </pre>
+      </div>
+      <p>df:</p>
+      <div class="code_output">
+        <pre>
+    Animal	Owner
+0	Falcon	Josh
+1	Falcon	Abraham
+2	Falcon	Minnie
+3	Parrot	Josh
+4	Parrot	Josh
+5	Parrot	Ron
+        </pre>
+      </div>
+      <p>grouped:</p>
+      <div class="code_output">
+        <pre>
+Animal
+Falcon    3
+Parrot    2
+Name: Owner, dtype: int64
+        </pre>
+      </div>
+
+      <h1>Sources:</h1>
+      <p>
+        <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html">
+          >pandas Documentation on groupby function<
+        </a>
+      </p>
+      <p>
+        <a href="https://stackoverflow.com/questions/59106311/how-to-count-the-values-corresponding-to-each-unique-value-in-another-column-in">
+          >StackOverflow answer by jezrael on the question: "How to count the values corresponding to each unique value in another column in a dataframe?"<
+        </a>
+      </p>
+      <p>
+        <a href="https://web.archive.org/web/20221102052945/https://stackoverflow.com/questions/59106311/how-to-count-the-values-corresponding-to-each-unique-value-in-another-column-in">
+          >(Internet Archive link) StackOverflow answer by jezrael on the question: "How to count the values corresponding to each unique value in another column in a dataframe?"<
+        </a>
+      </p>
+    </div>
+
+  </body>
+</html>
