@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" class="candy">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pytorch: Neural Net Quickstart.html</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+	  <script src="../index.js"></script>
+    
+    <div class="heading_and_nav">
+      <h1><a href="../index.html">Archive & Info Site</a></h1>
+      <p>
+        <a href="../index.html"> HOME </a>
+        ○
+        <a href="../directory.html"> DIRECTORY </a>
+        ○
+        <a href="../aboutme.html"> ABOUT ME & SITE </a>
+      </p>
+    </div>
+
+    <div class="header">
+      <h1>Pytorch: Neural Net Quickstart</h1>
+      <p>Last updated: May 13 2023</p>
+    </div>
+
+    <div class="content">
+      <h1>Basics: Model Creation, Training, Evaluation</h1>
+
+      <h2>How to create a model and pass something through it</h2>
+      <div class="code">
+        <pre>
+import torch
+import torch.nn as nn
+
+class NN(nn.Module):
+    def __init__(self, input_dim, hidden_dim, out_dim):
+        super(NN, self).__init__()
+        self.fc1 = nn.Linear(input_dim, hidden_dim)
+        self.fc2 = nn.Linear(hidden_dim, hidden_dim)
+        self.fc3 = nn.Linear(hidden_dim, out_dim)
+
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = torch.relu(self.fc2(x))
+        x = torch.sigmoid(self.fc3(x))
+        return x
+    
+test_model = NN(input_dim=50, hidden_dim=100, out_dim=1)
+test_input = torch.randn(1,50).to(torch.float32) <span class="comment"># torch.Size([1, 50])</span>
+output = test_model(test_input) <span class="comment"># torch.Size([1, 1])</span>
+
+print("output.shape:", output.shape)
+print("output:", output)
+print("output.dtype", output.dtype)
+        </pre>
+      </div>
+      <p>Output: 
+        <pre>
+output.shape: torch.Size([1, 1])
+output: tensor([[0.5384]], grad_fn=&lt;SigmoidBackward0&gt;)
+output.dtype: torch.float32
+        </pre>
+      </p>
+      <p>
+        Note that the input and outputs have dtypes of <b>torch.float32</b> and that the
+        output of dimension "1" is actually of shape (1,1) and NOT (1,). Getting this shape
+        wrong in the labeled data can cause problems!
+      </p>
+
+      <h2>How to perform one step of loss (one epoch of loss)</h2>
+      <h3>Method 1: Using loss.backward()</h3>
+      <div class="code">
+        <pre>
+def loss_function_mse(y_pred, y_label):
+    return ((y_pred-y_label)**2).mean()
+
+test_model = NN(input_dim=50, hidden_dim=100, out_dim=1)
+optimizer = torch.optim.Adam(test_model.parameters(), lr=1e-3)
+
+test_model.train()
+<span class="comment"># usually, the following will be in a loop for multiple epochs</span>
+label_y = torch.randint(low=0, high=1+1, size=(1,1)).to(torch.float32)
+pred_y = test_model(torch.randn(1,50).to(torch.float32))
+
+test_model.zero_grad()
+loss = loss_function_mse(pred_y, label_y)
+loss.backward()
+optimizer.step()
+        </pre>
+      </div>
+
+      <h3>Method 2: By directly accessing the gradients</h3>
+      <div class="code">
+        <pre>
+def loss_function_mse(y_pred, y_label):
+    return ((y_pred-y_label)**2).mean()
+
+test_model = NN(input_dim=50, hidden_dim=100, out_dim=1)
+<span class="comment">#optimizer = torch.optim.Adam(test_model1.parameters(), lr=1e-3)</span>
+
+test_model.train()
+<span class="comment"># usually, the following will be in a loop for multiple epochs</span>
+label_y = torch.randint(low=0, high=1+1, size=(1,1)).to(torch.float32)
+pred_y = test_model(torch.randn(1,50).to(torch.float32))
+test_model.zero_grad()
+loss = loss_function_mse(pred_y, label_y)
+loss.backward()
+<span class="comment">#optimizer.step()</span>
+
+weights = []
+grads = []
+for w in test_model.parameters():
+    weights.append(w.clone())
+    grads.append(w.grad.clone())
+new_weights = [w-(1e-3)*g for w,g in zip(weights,grads)]
+
+for param, new_weight in zip(test_model.parameters(), new_weights):
+    param.data.copy_(new_weight)
+        </pre>
+      </div>
+
+      <p>Notes:</p>
+      <ul>
+        <li>Remember that the optimizer needs to be matched to the model</li>
+        <li>.zero_grad() is necessary to clear out gradients</li>
+      </ul>
+    
+
+      <h2>How to perform one step of evaluation (one epoch of validation or test):</h2>
+      <div class="code">
+<pre>
+test_model = NN(input_dim=50, hidden_dim=100, out_dim=1)
+
+test_model.eval()
+<span class="comment"># usually, the following will be in a loop for multiple epochs</span>
+with torch.no_grad():
+    label_y = torch.randint(low=0, high=1+1, size=(1,1)).to(torch.float32)
+    pred_y = test_model(torch.randn(1,50).to(torch.float32))
+    
+    loss = loss_function_mse(pred_y, label_y)
+</pre>
+      </div>
+
+      <h1>Extra: Custom and Torch loss functions</h1>
+      <h2>Custom loss function example</h2>
+      <div class="code">
+        <pre>
+def loss_function_mse(y_pred, y_label):
+    return ((y_pred-y_label)**2).mean()
+
+label_y = torch.randint(low=0, high=1+1, size=(1,1)).to(torch.float32) 
+pred_y = test_model(torch.randn(1,50).to(torch.float32)) 
+
+test_model.zero_grad()
+loss = loss_function_mse(pred_y, label_y)
+        </pre>
+      </div>
+
+      <h2>Torch loss function example</h2>
+      <div class="code">
+        <pre>
+loss_fn = nn.MSELoss()
+loss = loss_fn(pred_y, label_y)
+        </pre>
+      </div>
+    
+      <h1>Source(s) for more information</h1>
+      <p>
+        <a href="https://pytorch.org/tutorials/beginner/basics/quickstart_tutorial.html">
+          >PyTorch official quickstart tutorials<
+        </a>
+      </p>
+    </div>
+
+  </body>
+</html>
