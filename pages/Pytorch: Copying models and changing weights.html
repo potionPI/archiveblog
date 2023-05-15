@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" class="candy">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pytorch: Copying Models and Changing Weights</title>
+    <link rel="stylesheet" href="../style.css">
+  </head>
+  <body>
+	  <script src="../index.js"></script>
+    
+    <div class="heading_and_nav">
+      <h1><a href="../index.html">Archive & Info Site</a></h1>
+      <p>
+        <a href="../index.html"> HOME </a>
+        ○
+        <a href="../directory.html"> DIRECTORY </a>
+        ○
+        <a href="../aboutme.html"> ABOUT ME & SITE </a>
+      </p>
+    </div>
+
+    <div class="header">
+      <h1>PyTorch: Copying Models and Changing Weights</h1>
+      <p>Last updated: May 15 2023</p>
+    </div>
+
+    <div class="content">
+      <h1>How to copy a model such that updating one model does not affect the other</h1>
+      <div class="code">
+        <pre>
+import copy
+test_model1 = NN(input_dim=50, hidden_dim=100, out_dim=1)
+test_model2 = copy.deepcopy(test_model1)
+        </pre>
+      </div>
+
+      <h1>How to give the parameters of one model to another</h1>
+      <div class="code">
+        <pre>
+import copy
+test_model1 = NN(input_dim=50, hidden_dim=100, out_dim=1)
+test_model2 = NN(input_dim=50, hidden_dim=100, out_dim=1)
+params = copy.deepcopy(test_model1.state_dict())
+test_model2.load_state_dict(params)
+        </pre>
+      </div>
+      <p>
+        Note that making a deep copy of the state_dict is necessary if the
+        state_dict will be modified in the future. If simply loading (for example
+        if trying to load a saved model), a shallow copy with: </p>
+    <div class="code"><p>test_model2.load_state_dict(test_model1.state_dict())</div></p>
+      <p>is fine.</p>
+
+      <h1>How to manually extract weights and gradients</h1>
+      <div class="code">
+        <pre>
+test_model = NN(input_dim=50, hidden_dim=100, out_dim=1)
+<span class="comment">#optimizer = torch.optim.Adam(test_model.parameters(), lr=1e-3)</span>
+test_model.train()
+
+label_y = torch.randint(low=0, high=1+1, size=(1,1)).to(torch.float32) 
+pred_y = test_model(torch.randn(1,50).to(torch.float32)) 
+
+test_model.zero_grad()
+loss_fn = nn.MSELoss()
+loss = loss_fn(pred_y, label_y)
+loss.backward()
+<span class="comment">#optimizer.step()</span>
+
+weights = []
+grads = []
+for w in test_model.parameters():
+    weights.append(w.clone())
+    grads.append(w.grad.clone())
+new_weights = [w-1e-3*g for w,g in zip(weights,grads)]
+        </pre>
+      </div>
+      <p>
+        Note: It is also possible to get the gradients using torch.autograd.grad instead:
+      </p>
+      <div class="code">
+        <pre>
+test_model = NN(input_dim=50, hidden_dim=100, out_dim=1)
+<span class="comment">#optimizer = torch.optim.Adam(test_model.parameters(), lr=1e-3)</span>
+loss = loss_fn(pred_y, label_y)
+<span class="comment">#loss.backward()</span>
+<span class="comment">#optimizer.step()</span>
+
+<span class="comment"># grads is a tuple rather than a list</span>
+grads = torch.autograd.grad(loss, test_model.parameters())
+        </pre>
+      </div>
+
+      <h1>How to manually update weights, weight by weight</h1>
+      <div class="code">
+        <pre>
+test_model = NN(input_dim=50, hidden_dim=100, out_dim=1)
+
+for param, new_weight in zip(test_model.parameters(), new_weights):
+    param.data.copy_(new_weight)
+        </pre>
+      </div>
+      
+
+      <h1>How to manually update weights using a list of weights and gradients</h1>
+      <div class="code">
+        <pre>
+test_model = NN(input_dim=50, hidden_dim=100, out_dim=1)
+optimizer = torch.optim.Adam(test_model.parameters(), lr=1e-3)
+test_model.train()
+
+for param, w in zip(test_model.parameters(), weights):
+    param.data.copy_(w)
+for param, grad in zip(test_model.parameters(), grads):
+    param.grad = grad
+    
+optimizer.step()
+        </pre>
+      </div>
+    
+      <h1>Source(s) for more information</h1>
+      <p>
+        <a href="https://github.com/GauravIyer/MAML-Pytorch/blob/master/Experiment%201/Experiment_1_Sine_Regression.ipynb">
+          >This was the code I referenced for how to use torch.autograd.grad<
+        </a>
+      </p>
+    </div>
+
+  </body>
+</html>
